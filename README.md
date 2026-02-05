@@ -41,23 +41,16 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 ## Project Structure
 
 smart-office/
-├── README.md                 # Project overview and usage instructions
-├── DESIGN.md                 # System design and architecture
-├── package.json              # Node.js dependencies and scripts
-├── server.js                 # Main backend server (Express)
-├── smartoffice.db            # SQLite database (document metadata)
-├── docs/                     # Documentation (optional)
-│   └── api.md                # API endpoint reference
-├── public/                   # Static frontend files
-│   ├── index.html            # Browser-based editor interface
-│   ├── style.css             # (optional) Styling
-│   └── script.js             # (optional) Frontend logic
-├── documents/                # Document content storage (JSON)
+├── server.js            # Node.js backend server
+├── package.json         # Project dependencies and scripts
+├── smartoffice.db       # SQLite database (document metadata)
+├── documents/           # Stored document content (JSON)
 │   └── <document-id>.json
-└── src/                      # Backend source code (optional if expanded)
-    ├── routes/               # API route handlers
-    ├── models/               # Data models
-    └── utils/                # Helper functions
+├── public/              # Frontend assets
+│   └── index.html       # Browser-based editor UI
+├── DESIGN.md            # System design and architecture explanation
+└── README.md            # Project overview and usage instructions
+
 ---
 
 ## How to Run
@@ -126,7 +119,9 @@ This project is a functional prototype intended to demonstrate system design thi
 ## Screenshots
 
 ### Document Editor (Frontend)
-![Smart Office Editor](screenshots/frontend.png)
+![Smart Office Editor](<img width="908" height="691" alt="Screenshot 2026-02-04 231634" src="https://github.com/user-attachments/assets/f08e8925-5b82-414d-892f-c5a3e1862400" />
+)
 
 ### Exported PDF (Offline)
-![Exported PDF](screenshots/exported-pdf.png)
+![Exported PDF](<img width="1050" height="620" alt="image" src="https://github.com/user-attachments/assets/faa71092-f237-42cc-af8e-48f156887346" />
+)
