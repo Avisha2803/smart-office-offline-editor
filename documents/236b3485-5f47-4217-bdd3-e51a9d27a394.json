@@ -1,0 +1,43 @@
+{
+  "ops": [
+    {
+      "insert": "OFFICIAL LETTER"
+    },
+    {
+      "attributes": {
+        "header": 1
+      },
+      "insert": "\n"
+    },
+    {
+      "insert": "\n"
+    },
+    {
+      "attributes": {
+        "bold": true
+      },
+      "insert": "Sender Address"
+    },
+    {
+      "insert": "\nOrganization Name\nCity, Country\n\n"
+    },
+    {
+      "attributes": {
+        "bold": true
+      },
+      "insert": "Receiver Address"
+    },
+    {
+      "insert": "\n\n"
+    },
+    {
+      "attributes": {
+        "bold": true
+      },
+      "insert": "Subject: "
+    },
+    {
+      "insert": "Regarding Smart Office System\n\nDear Sir/Madam,\n\nThis is a standardized document template created using the Smart Office system. It ensures consistent formatting and structure across documents.\n\nSincerely,\nSmart Office Team\n"
+    }
+  ]
+}

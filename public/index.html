@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Office – Offline Document Editor</title>
+
+  <!-- Quill Editor -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+  <!-- PDF Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    #editor {
+      height: 350px;
+      background: white;
+    }
+
+    button {
+      margin: 8px 6px 8px 0;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+
+    button:hover {
+      background: #efefef;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Smart Office – Offline Document Editor</h2>
+
+<div id="editor"></div>
+
+<br />
+
+<button onclick="saveDoc()">💾 Save</button>
+<button onclick="loadDoc()">📂 Load</button>
+<button onclick="loadTemplate()">📑 Load Template</button>
+<button onclick="startVoice()">🎙 Voice Typing</button>
+<button onclick="exportPDF()">📄 Export PDF</button>
+
+<script>
+  /* -------------------------
+     Initialize Quill Editor
+  ------------------------- */
+  const quill = new Quill('#editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['clean']
+      ]
+    }
+  });
+
+  let currentDocId = null;
+
+  /* -------------------------
+     Save Document
+  ------------------------- */
+  function saveDoc() {
+    fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: currentDocId,
+        content: quill.getContents()
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      currentDocId = data.id;
+      alert("Document saved successfully!\nDocument ID: " + currentDocId);
+    });
+  }
+
+  /* -------------------------
+     Load Document
+  ------------------------- */
+  function loadDoc() {
+    const id = prompt("Enter Document ID:");
+    if (!id) return;
+
+    fetch(`/api/load/${id}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Not found");
+        return res.json();
+      })
+      .then(data => {
+        quill.setContents(data);
+        currentDocId = id;
+      })
+      .catch(() => alert("Document not found"));
+  }
+
+  /* -------------------------
+     Load Template
+  ------------------------- */
+  function loadTemplate() {
+    const template = {
+      ops: [
+        { insert: "OFFICIAL LETTER\n", attributes: { header: 1 } },
+        { insert: "\nSender Address\n", attributes: { bold: true } },
+        { insert: "Organization Name\nCity, Country\n\n" },
+        { insert: "Receiver Address\n\n", attributes: { bold: true } },
+        { insert: "Subject: ", attributes: { bold: true } },
+        { insert: "Regarding Smart Office System\n\n" },
+        { insert: "Dear Sir/Madam,\n\n" },
+        { insert: "This is a standardized document template created using the Smart Office system. It ensures consistent formatting and structure across documents.\n\n" },
+        { insert: "Sincerely,\nSmart Office Team\n" }
+      ]
+    };
+
+    quill.setContents(template);
+    currentDocId = null;
+  }
+
+  /* -------------------------
+     Offline Voice Typing
+  ------------------------- */
+  let recognition;
+
+  function startVoice() {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Speech Recognition not supported in this browser.");
+      return;
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onresult = function (event) {
+      const text = event.results[0][0].transcript;
+      const range = quill.getSelection(true);
+      quill.insertText(range.index, text + " ");
+    };
+
+    recognition.onerror = function (event) {
+      console.error("Voice recognition error:", event.error);
+      alert("Voice recognition failed.");
+    };
+
+    recognition.start();
+  }
+
+  /* -------------------------
+     Export PDF
+  ------------------------- */
+  function exportPDF() {
+    const editorContent = document.querySelector("#editor");
+
+    const options = {
+      margin: 10,
+      filename: "smart-office-document.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    };
+
+    html2pdf().from(editorContent).set(options).save();
+  }
+</script>
+
+</body>
+</html>
