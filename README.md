@@ -36,42 +36,31 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 - JSON files for document content
 - SQLite for document metadata
 
+## Architecture Overview
 
-┌──────────────────────────────┐
-│          User Browser        │
-│  (Chrome / Edge / Firefox)   │
-│                              │
-│  ┌────────────────────────┐  │
-│  │  Rich Text Editor      │  │
-│  │  (Quill.js)            │  │
-│  ├────────────────────────┤  │
-│  │  Templates             │  │
-│  │  Voice Typing (STT)    │  │
-│  │  PDF Export            │  │
-│  └────────────────────────┘  │
-│                              │
-└───────────────▲──────────────┘
-                │
-        HTTP (REST APIs)
-                │
-┌───────────────┴──────────────┐
-│     Local Node.js Server      │
-│        (Express.js)           │
-│                              │
-│  ┌────────────────────────┐  │
-│  │ API Layer              │  │
-│  │ - /api/save            │  │
-│  │ - /api/load/:id        │  │
-│  │ - /api/lock/:id        │  │
-│  └────────────────────────┘  │
-│                              │
-│  ┌──────────────┐ ┌────────┐ │
-│  │ JSON Files   │ │ SQLite │ │
-│  │ (Documents)  │ │ (Meta) │ │
-│  └──────────────┘ └────────┘ │
-│                              │
-└──────────────────────────────┘
+```mermaid
+flowchart TD
+    A[User Browser<br/>(Chrome / Edge / Firefox)]
+    
+    A --> B[Rich Text Editor<br/>(Quill.js)]
+    
+    B --> C[Templates]
+    B --> D[Voice Typing<br/>(Speech-to-Text)]
+    B --> E[PDF Export<br/>(Client-side)]
+    
+    B -->|HTTP REST APIs| F[Local Node.js Server<br/>(Express.js)]
+    
+    F --> G[/api/save]
+    F --> H[/api/load/:id]
+    F --> I[/api/lock/:id]
+    
+    G --> J[JSON Files<br/>(Document Content)]
+    H --> J
+    
+    G --> K[SQLite Database<br/>(Metadata)]
+    I --> K
 
+  
 
 ---
 
