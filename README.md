@@ -36,6 +36,43 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 - JSON files for document content
 - SQLite for document metadata
 
+
+┌──────────────────────────────┐
+│          User Browser        │
+│  (Chrome / Edge / Firefox)   │
+│                              │
+│  ┌────────────────────────┐  │
+│  │  Rich Text Editor      │  │
+│  │  (Quill.js)            │  │
+│  ├────────────────────────┤  │
+│  │  Templates             │  │
+│  │  Voice Typing (STT)    │  │
+│  │  PDF Export            │  │
+│  └────────────────────────┘  │
+│                              │
+└───────────────▲──────────────┘
+                │
+        HTTP (REST APIs)
+                │
+┌───────────────┴──────────────┐
+│     Local Node.js Server      │
+│        (Express.js)           │
+│                              │
+│  ┌────────────────────────┐  │
+│  │ API Layer              │  │
+│  │ - /api/save            │  │
+│  │ - /api/load/:id        │  │
+│  │ - /api/lock/:id        │  │
+│  └────────────────────────┘  │
+│                              │
+│  ┌──────────────┐ ┌────────┐ │
+│  │ JSON Files   │ │ SQLite │ │
+│  │ (Documents)  │ │ (Meta) │ │
+│  └──────────────┘ └────────┘ │
+│                              │
+└──────────────────────────────┘
+
+
 ---
 
 ## Project Structure
