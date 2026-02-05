@@ -41,16 +41,23 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 ## Project Structure
 
 smart-office/
-├── server.js            # Node.js backend server
-├── package.json         # Project dependencies and scripts
-├── smartoffice.db       # SQLite database (document metadata)
-├── documents/           # Stored document content (JSON)
+├── README.md                 # Project overview and usage instructions
+├── DESIGN.md                 # System design and architecture
+├── package.json              # Node.js dependencies and scripts
+├── server.js                 # Main backend server (Express)
+├── smartoffice.db            # SQLite database (document metadata)
+├── docs/                     # Documentation (optional)
+│   └── api.md                # API endpoint reference
+├── public/                   # Static frontend files
+│   ├── index.html            # Browser-based editor interface
+│   ├── style.css             # (optional) Styling
+│   └── script.js             # (optional) Frontend logic
+├── documents/                # Document content storage (JSON)
 │   └── <document-id>.json
-├── public/              # Frontend assets
-│   └── index.html       # Browser-based editor UI
-├── DESIGN.md            # System design and architecture explanation
-└── README.md            # Project overview and usage instructions
-
+└── src/                      # Backend source code (optional if expanded)
+    ├── routes/               # API route handlers
+    ├── models/               # Data models
+    └── utils/                # Helper functions
 ---
 
 ## How to Run
