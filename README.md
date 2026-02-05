@@ -40,29 +40,37 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 
 ```mermaid
 flowchart TD
-    A[User Browser<br/>(Chrome / Edge / Firefox)]
-    
-    A --> B[Rich Text Editor<br/>(Quill.js)]
-    
-    B --> C[Templates]
-    B --> D[Voice Typing<br/>(Speech-to-Text)]
-    B --> E[PDF Export<br/>(Client-side)]
-    
-    B -->|HTTP REST APIs| F[Local Node.js Server<br/>(Express.js)]
-    
-    F --> G[/api/save]
-    F --> H[/api/load/:id]
-    F --> I[/api/lock/:id]
-    
-    G --> J[JSON Files<br/>(Document Content)]
+    A[User Browser]
+    B[Rich Text Editor]
+    C[Templates]
+    D[Voice Typing]
+    E[PDF Export]
+
+    F[Local Server]
+    G[Save API]
+    H[Load API]
+    I[Lock API]
+
+    J[JSON Files]
+    K[SQLite Database]
+
+    A --> B
+    B --> C
+    B --> D
+    B --> E
+
+    B --> F
+
+    F --> G
+    F --> H
+    F --> I
+
+    G --> J
     H --> J
-    
-    G --> K[SQLite Database<br/>(Metadata)]
+
+    G --> K
     I --> K
-
-  
-
----
+```
 
 ## Project Structure
 
