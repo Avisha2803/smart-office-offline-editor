@@ -40,16 +40,7 @@ The system runs entirely on a local machine or LAN and focuses on simplicity, re
 
 ## Project Structure
 
-smart-office/
-├── server.js            # Node.js backend server
-├── package.json         # Project dependencies and scripts
-├── smartoffice.db       # SQLite database (document metadata)
-├── documents/           # Stored document content (JSON)
-│   └── <document-id>.json
-├── public/              # Frontend assets
-│   └── index.html       # Browser-based editor UI
-├── DESIGN.md            # System design and architecture explanation
-└── README.md            # Project overview and usage instructions
+<img width="603" height="291" alt="image" src="https://github.com/user-attachments/assets/3e036419-af9e-4361-a75b-7e5499aed422" />
 
 ---
 
@@ -92,25 +83,6 @@ smart-office/
 
 ---
 
-## What Is Not Implemented (v1)
-
-- User authentication
-- Real-time collaboration
-- Document version history
-- Cloud synchronization
-
----
-
-## Future Improvements
-
-- Document approvals and workflows
-- Document search and listing
-- Version control and audit logs
-- Offline AI-assisted document drafting
-- Multi-user collaboration with locking or CRDTs
-
----
-
 ## Notes
 
 This project is a functional prototype intended to demonstrate system design thinking, offline-first architecture, and practical trade-offs rather than production-level completeness.
@@ -119,9 +91,19 @@ This project is a functional prototype intended to demonstrate system design thi
 ## Screenshots
 
 ### Document Editor (Frontend)
-![Smart Office Editor](<img width="908" height="691" alt="Screenshot 2026-02-04 231634" src="https://github.com/user-attachments/assets/f08e8925-5b82-414d-892f-c5a3e1862400" />
-)
+![Smart Office Editor]
+
+
+
+<img width="908" height="691" alt="Screenshot 2026-02-04 231634" src="https://github.com/user-attachments/assets/d97a927d-8723-41f4-bab1-d2ee04cf6165" />
+
+
+
+
 
 ### Exported PDF (Offline)
-![Exported PDF](<img width="1050" height="620" alt="image" src="https://github.com/user-attachments/assets/faa71092-f237-42cc-af8e-48f156887346" />
-)
+![Exported PDF]
+
+
+
+<img width="1050" height="620" alt="Screenshot 2026-02-05 091247" src="https://github.com/user-attachments/assets/59c65500-fa34-4352-baac-7a0cb7303d34" />
